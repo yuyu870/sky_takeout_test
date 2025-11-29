@@ -1,6 +1,7 @@
 package com.sky.controller.admin;
 
 import com.sky.constant.JwtClaimsConstant;
+import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.entity.Employee;
 import com.sky.properties.JwtProperties;
@@ -30,6 +31,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
     @Autowired
     private JwtProperties jwtProperties;
+
 
     /**
      * 登录
@@ -68,6 +70,19 @@ public class EmployeeController {
      */
     @PostMapping("/logout")
     public Result<String> logout() {
+        return Result.success();
+    }
+
+
+    /**
+     * 新增员工
+     * @param employee
+     */
+    @PostMapping
+    public Result save(@RequestBody EmployeeDTO employee) {
+
+        employeeService.save(employee);
+        log.info("新增员工，员工数据：{}", employee);
         return Result.success();
     }
 
